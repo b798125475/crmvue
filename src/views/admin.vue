@@ -18,11 +18,8 @@
 								<el-menu-item index="1-2">服务分配</el-menu-item>
 								<el-menu-item index="1-3">服务处理</el-menu-item>
 								<el-menu-item index="1-4">服务反馈</el-menu-item>
-								<el-menu-item index="1-5">服务归档</el-menu-item>
-								
-							</el-menu-item-group>
-							
-							
+								<el-menu-item index="1-5">服务归档</el-menu-item>							
+							</el-menu-item-group>													
 						</el-submenu>
 						<el-menu-item index="2">
 							<i class="el-icon-menu"></i>
@@ -36,6 +33,16 @@
 							<i class="el-icon-setting"></i>
 							<span slot="title">导航四</span>
 						</el-menu-item>
+						<el-submenu index="5">
+							<template slot="title">
+								<i class="el-icon-edit"></i>
+								<span>营销管理</span>
+							</template>
+							<el-menu-item-group>
+								<el-menu-item index="/admin/saleChanceList">销售机会管理</el-menu-item>
+								<el-menu-item index="1-2">客户开发计划</el-menu-item>					
+							</el-menu-item-group>													
+						</el-submenu>
 					</el-menu>
 				</el-aside>
 				<el-main id="main">
@@ -109,8 +116,6 @@
 	.el-main {
 		background-color: #E9EEF3;
 		color: #333;
-		text-align: center;
-		line-height: 160px;
 	}
 
 	body>.el-container {
