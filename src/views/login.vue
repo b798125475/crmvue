@@ -51,7 +51,7 @@
 	         		if(response.data==''){
 	         			alert('用户名或密码输入错误！');
 	         		}else{
-	         			// this.$setSessionStorage('users',response.data);
+	         			this.$setSessionStorage('Sysuser',response.data);
 	         			this.$router.push('/admin');
 					
 	         		}
