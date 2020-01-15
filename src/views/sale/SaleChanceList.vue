@@ -24,7 +24,7 @@
 				<el-button type="success" @click="add()" size="small">新建</el-button>
 			</el-form-item>
 		</el-form>
-		<el-table :data="results.data" style="width: 80%;margin-bottom: 15px;" @selection-change="handleSelectionChange">			
+		<el-table :data="results.data" style="width: 90%;margin-bottom: 15px;" @selection-change="handleSelectionChange">			
 			<el-table-column prop="chanceId" label="编号" width="50px">
 			</el-table-column>
 			<el-table-column prop="chanceCustName" label="客户名称" >
@@ -39,7 +39,7 @@
 			</el-table-column>
 			<el-table-column label="操作" width="150px">
 				<template slot-scope="scope">
-					<el-button @click="" type="text" size="small">指派</el-button>
+					<el-button @click="zhipai(scope.row)" type="text" size="small">指派</el-button>
 					<el-button @click="update(scope.row)" type="text" size="small">编辑</el-button>
 					<el-button @click="del(scope.row)" type="text" size="small">删除</el-button>
 				</template>
@@ -60,7 +60,8 @@
 				params: {
 					chanceCustName: '',
 					chanceTitle: '',
-					chanceLinkman: ''
+					chanceLinkman: '',
+					chanceStatus:0
 				},
 				multipleSelection:[]  //此数据专用于批量删除
 			}
@@ -68,7 +69,7 @@
 		created() {
 			this.fenye(1);
 		},
-		methods: {
+		methods: {			
 			fenye(pageNum) {
 				this.$fenye('selectSaleChanceCount', 'selectSaleChancePaging', this.params, pageNum, this.$store.state.maxPageNum, (response) => {
 					this.results = response;
@@ -89,8 +90,8 @@
 				if (!confirm('确认要删除此数据吗？')) {
 					return;
 				}
-				this.$axios.post('deleteNews', {
-						newsId: row.newsId
+				this.$axios.post('deleteSaleChance', {
+						chanceId: row.chanceId
 					})
 					.then((response) => {
 						if (response.data == 1) {
@@ -102,37 +103,13 @@
 					.catch((error) => {
 						console.log(error);
 					});
-			},
-			delBatch() {
-				if (this.multipleSelection.length <= 0) {
-					alert('请选择要删除的数据！');
-					return;
-				}
-				if (!confirm('确认要删除这些数据吗？')) {
-					return;
-				}
-				//由于服务器端需要int数组参数来批量删除，所以这里将对象数组中的id抽取出来成为一个新数组
-				let paramArr = [];
-				for(let i=0;i<this.multipleSelection.length;i++){
-					paramArr[i]=this.multipleSelection[i].newsId;
-				}
-				this.$axios.post('deleteNewsBatch', paramArr)
-					.then((response) => {
-						if (response.data > 0) {
-							this.fenye(1);
-						} else {
-							alert('删除失败！');
-						}
-					})
-					.catch((error) => {
-						console.log(error);
-					});
-			},
+			},			
 			update(row) {
 				this.$router.push({
-					path: '/admin/updateNews',
+					path: '/admin/updateSaleChance',
 					query: {
-						newsId: row.newsId
+						chanceId: row.chanceId,
+						chanceCreateId:row.chanceCreateId
 					}
 				});
 			},
@@ -140,7 +117,16 @@
 				this.multipleSelection = val;
 			},
 			add(){
-				this.$router.push('/admin/addNews');
+				this.$router.push('/admin/addSaleChance');
+			},
+			zhipai(row){
+				this.$router.push({
+					path: '/admin/zhipaiSaleChance',
+					query: {
+						chanceId: row.chanceId,
+						chanceCreateId:row.chanceCreateId
+					}
+				});
 			}
 		}
 	}
