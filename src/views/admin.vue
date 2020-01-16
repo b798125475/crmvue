@@ -25,8 +25,8 @@
 								<span>客户管理</span>
 							</template>
 							<el-menu-item-group>
-								<el-menu-item index="">客户信息管理</el-menu-item>
-								<el-menu-item index="">客户流失管理</el-menu-item>
+								<el-menu-item index="/admin/custManagement">客户信息管理</el-menu-item>
+								<el-menu-item index="/admin/loss">客户流失管理</el-menu-item>
 							</el-menu-item-group>
 						</el-submenu>
 						<el-submenu index="3">
