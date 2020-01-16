@@ -99,7 +99,6 @@ function fenye(countUrl, dataUrl, dataParam, pageNum, maxNum, callback) {
 			//alert(JSON.stringify(response));
 			//获取查询的总行数
 			totalRow = response.data;
-
 			//如果查询数据行数为0，那么直接调用回调函数，然后结束。
 			if (totalRow == 0) {
 				callback(result);
