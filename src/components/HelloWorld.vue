@@ -1,6 +1,6 @@
 <template>
 <div>
-	欢迎登陆本网站
+	<img src="../assets/welcome.jpg"/>
 </div>
    
 </template>
@@ -14,5 +14,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
-
+img{
+	width: 100%;
+	height: 100%;
+}
 </style>
